@@ -1,0 +1,62 @@
+{%extends 'home/layot.html'%}
+{%load static%}
+{%block body%}
+{%if user.is_authenticated%}
+
+<div class="Addtocart">
+    <form method="post" name="formadd">
+        {%csrf_token%}
+
+    <table style="width: 900px; margin-left: 260px;">
+
+{%for adds in add%}
+<tr>
+<td style="border: none;"><div class="picture"><img src="{{adds.image}}" alt="shirt" width="100px" height="100px"></div>
+{{adds.name}}</td>
+<td style="border: none;">${{adds.price}}</td>
+<td style="border: none;"><input type="number" style="width:50px" placeholder="1" name="number" value="{{adds.Total}}" min="0" max="5"></td>
+<td style="border: none;">Total=${{adds.get_total}} (20% tax)</td>
+<td style="border: none; font-size: 10px;">
+<a href="{%url 'remove' adds.id%}" style="text-decoration:none;
+    color:black;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"
+>
+    remove</a>
+</td>
+</tr>  
+{%empty%}
+<h2 style="margin-bottom: -280px;">no products please continue shoping...</h2>
+{%endfor%}
+</table>
+{%if add.exists%}
+<button type="submit" style=
+"width: 150px; height: 30px; background-color:aqua; border-radius:10px; outline:none; border:none; color:red;cursor:pointer;
+font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif;"
+>Checkout...</button>
+{%else%}
+
+{%endif%}
+</form>
+
+</div>
+<div style=" margin-top:15px;">
+   <a href="{%url 'men'%}" style="text-decoration: none; font-size: 20px; margin-left: 530px;">Add a Products</a> 
+</div>
+{%else%}
+<a href="{%url 'login'%}" style="text-decoration: none;"><h1 style="color: red; text-align: center; font-family: monospace; margin-top: 100px;">Please login firist</h1></a>
+{%endif%}
+<style>
+    table{
+        width: 500px; 
+        height: 150px;
+        border-collapse: collapse;
+        margin-left: 400px;
+        margin-top: 150px;
+        text-align: center;
+    }
+    td ,th{
+    border: orangered solid 2px; 
+    }
+</style>
+{%endblock%}

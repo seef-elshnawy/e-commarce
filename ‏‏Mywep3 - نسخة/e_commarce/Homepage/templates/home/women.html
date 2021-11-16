@@ -1,0 +1,139 @@
+{%extends 'home/layot.html'%}
+{%load static%}
+{%block body%}
+<div class="title-product">
+Product women
+</div>
+<div class="main">
+{%for products in product%}
+<div class="all-product">
+  <div class="container" >
+    <a href="{%url 'productId' products.id%}">
+     <div class="container2">  
+    <div class="picture" ><img src="{{products.image.url}}" alt="shirt" width="250px" height="280px"></div>
+    <div class="name">{{products.name}}<br>
+    <div class="description">{{products.smalldesc}}</div><br>
+<div class="price">Price : {{products.price}}$</div></div> 
+</div></a>
+<div class="cart" style='margin-left: 200px;'><a  class="btn btn-primary addtocart1" data-action = "add" data-product = "{{products.id}}">Add to Cart</a>
+
+    <!--<i class="fa fa-cart-plus" id='font'></i>--></div>
+ <!--href="{%url 'addtocart'%}"-->
+</div>
+</div>    
+{%endfor%}
+</div>
+<div class="main1" style="margin-top:-550px;"><a href="{%url 'addtocart' %}" style="margin-left: 100px; font-size: 20px; text-decoration: none;"><i class="fa fa-shopping-cart" id='font'></i><p style="font-size: 25px; color:red; margin-left: 150px; margin-top: -36px;">{{number.count}}</p></a>
+</div>
+<form method="post" style='margin-top:11px; margin-right: 500px;'>
+{%csrf_token%}
+<input type="search" name="search" style="margin-left: 520px; margin-top: -20px; width: 300px; height: 30px; border-radius: 0px; outline: none; border: gray solid 1px; border-top: none; border-right: none; border-left: none;" placeholder="Search">
+<button type="submit" style="border: none; cursor: pointer;"><i class="fa fa-search"></i></button>
+</form>
+<style>
+    body{
+        background-color: white;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #font{
+        font-size: 45px;
+         color: gray;
+         cursor: pointer;
+    }
+    #font:hover{
+        color: orange;
+    }
+.all-product .container{
+    margin-top: 150px;
+    margin-left: 100px;
+    width: 250px;
+}
+ .title-product{
+     font-size: 40px;
+     text-align: center;
+     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }   
+ .title-product::after{
+     content: '';
+     background-color: green;
+     display: block;
+     height: 2px;
+     width: 80px;
+     margin-left: 560px;
+ }
+ .container{
+    border: whitesmoke solid 2px;
+    box-shadow: 2px 2px 2px 2px white;
+    margin: 40px;
+    height: fit-content;
+ }
+ .picture{
+     width: 300px;
+     height: 200px;
+     cursor: pointer;
+ }
+
+    .container a{
+        margin-top: 0px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        font-size: 15px;
+        text-decoration: none;
+        color: black;
+    }
+    .container a .description{
+        margin-left: 0px;
+    }
+
+  .all-product a .description{
+     max-width: 300px;
+     margin-top: 5px;
+     font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+ }
+  .all-product .picture{
+     margin-left: -50px;
+     margin-top: 0px;
+  }
+  .all-product a .price{
+     max-width: 300px;
+     margin-top: -20px;
+     font-size: 15px;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     text-decoration: none;
+
+    }
+    .price::before{
+     content: ' ';
+     display: block;
+     width: 100px;
+     height: 2px;
+     background-color: black;
+
+    }
+  .all-product a .name{
+     max-width: 300px;  
+     margin-left: -40px;
+     margin-top: 100px;
+     font-size: 20px;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     text-decoration: none;
+ }
+  .all-product .name:hover{
+     color:orangered;
+ }
+ .main{
+     display: flex;
+     flex-flow: wrap;
+     margin-top: -70px;
+ }
+ .container2{
+     margin:0px 0px 0px 50px
+ }
+</style>
+{%endblock%}

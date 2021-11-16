@@ -1,0 +1,286 @@
+{%extends 'home/layot.html'%}
+{%load static%}
+{%block body%}
+<div class="allpage">
+<div class="contianer-image">
+    <div id='mainplace'>
+        <img src="{{products.image.url}}" alt="" width="300px" height="400px" id="place1c">
+        <img src="{{products.image2.url}}" alt="not found" width='300px' height="400px" id="place2c"  style="display: none;">
+        <img src="{{products.image3.url}}" alt="not found" width='300px' height="400px" id="place3c" style="display: none;">
+    </div>
+<div id="twoplace">
+    <img src="{{products.image.url}}" alt="not found" width="100px" height="80px" id="place1" onmouseenter="seef1()" onclick="seef1()" style="margin-bottom:3px; border: white solid 2px;">
+    <img src="{{products.image2.url}}" alt="not found" width='100px' height="80px" id="place2" onmouseenter="seef2()" onclick="seef2()" style="margin-bottom:3px; border: white solid 2px;">
+    <img src="{{products.image3.url}}" alt="not found" width='100px' height="80px" id="place3" onmouseenter="seef3()" onclick="seef3()" style="margin-bottom:3px; border: white solid 2px;">
+</div>
+</div>
+</div>
+
+<div class="information-image">
+<h1>{{products.name}}</h1>
+<div class="measures">
+<input type="button" value="XS" disabled>
+<input type="button" value="S">
+<input type="button" value="L">
+<input type="button" value="XL" disabled>
+<br>
+</div>
+<div class="desc">
+    <h1>{{products.desc}}</h1>
+    <h1>{{products.desc1}}</h1>
+    <h1>{{products.desc2}}</h1>
+    <h1>{{products.desc3}}</h1>
+    <h1>{{products.desc4}}</h1>
+    <br>
+    <h1>{{products.desc5}}</h1>
+    <h1>{{products.desc6}}</h1>
+    <h1>{{products.desc7}}</h1>
+    <h1>{{products.desc8}}</h1>
+    <h1>{{products.desc9}}</h1>
+
+</div>
+<div class="price">
+   price: {{products.price}}$
+</div>
+<div class="buttons">
+    {%if user.is_authenticated%}
+    <form method="post">
+  {% csrf_token %}
+<input type="submit" class="input1" value="Add to cart" name="button">
+</form>
+</a>  
+<input type="button" class="input2" value="Buy">
+{%else%}
+<a href="{%url 'login'%}">
+<input type="button" class="input2" value="you must log in to buy">
+</a>
+{%endif%}
+</div>
+</div>
+<hr width="1000px" style="border: black solid 1px; margin-top: 200px;">
+   <div style="font-size: 20px; margin-top: 20px; margin-left: 20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> 
+    You also may like</div>
+    <div class="main">   
+    {%for filters in filter%}
+    <div class="all-product">
+        <div class="container1" >
+          <a href="{%url 'productId' filters.id%}">
+           <div class="container2">  
+          <div class="picture1" ><img src="{{filters.image.url}}" alt="shirt" width="200px" height="180px"></div>
+          <div class="name">{{filters.name}}<br>
+          <div class="description">{{filters.smalldesc}}</div><br>
+      <div class="price1">Price : {{filters.price}}$</div></div> 
+      </div></a>
+      </div>
+      </div>
+      {%endfor%}
+      </div>
+
+
+<script>
+    const main=document.getElementById('mainplace')
+    const twoplace=document.getElementById('twoplace')
+   const place1= document.getElementById('place1')
+    const place2 =document.getElementById('place2')
+    const place3 =document.getElementById('place3')
+    const place1c =document.getElementById('place1c')
+    const place2c =document.getElementById('place2c')
+    const place3c =document.getElementById('place3c')
+function seef1(){
+   place1c.style='display:block;'
+    place2c.style='display:none;'
+    place3c.style='display:none;'
+    place1.style='border:orange solid 2px; margin-bottom:3px;'
+    place2.style='border:none; margin-bottom:3px;'
+    place3.style='border:none ;margin-bottom:3px;'
+
+}
+function seef2(){
+    place2c.style='display:block;'
+    place1c.style='display:none;'
+    place3c.style='display:none;'
+    place1.style='border:none ;margin-bottom:3px;'
+    place3.style='border:none ;margin-bottom:3px;'
+    place2.style='border:orange solid 2px ;margin-bottom:3px;'
+
+}
+function seef3(){
+    place2c.style='display:none;'
+    place1c.style='display:none;'
+    place3c.style='display:block;'
+    place1.style='border:none; margin-bottom:3px;'
+    place2.style='border:none ; margin-bottom:3px;'
+    place3.style='border:orange solid 2px ;margin-bottom:3px;'
+
+
+}
+</script>
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    body{
+    }
+    .desc{
+        width: 300px;
+        display: flex;
+        flex-flow: wrap;
+    }
+    .desc h1{
+     font-size: 20px;
+     display: flex;
+     flex-flow: wrap;
+    }
+    .buttons{
+        margin-left: 600px;
+    }
+    .buttons input{
+        border-radius: 20px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    .input1{
+        background-color: yellow; 
+        width:170px; 
+        height:40px; 
+        color: black;
+        font-family: sans-serif;
+        font-size: 17px;
+    }
+    .input2{
+        background-color: orange; 
+        width:170px; 
+        height:40px; 
+        color: black;
+        font-family: sans-serif;
+        font-size: 17px;
+    }
+    .input1:hover{
+        background-color:rgb(228, 188, 13);
+    }
+    .input2:hover{
+        background-color: darkorange;
+    }
+    #twoplace{
+        margin-left: 47px;
+        margin-top: -400px;
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+    }
+  .contianer-image{
+   width: 300px;
+  } 
+  .information-image{
+   margin-left: 500px;
+margin-top: -230px;
+width: 300px;
+display: flex;
+flex-flow:wrap column;
+} 
+
+  .allpage{
+    display: flex;
+    flex-direction: row;
+  }
+.measures::after{
+    content: ' ';
+    background-color: green;
+    margin-top: 15px;
+    height: 2px;
+    width: 200px;
+    display: block;
+}
+#mainplace{
+    height: 400px;
+    width: 400px;
+    margin-left: 150px;
+    margin-top: 80px;
+}
+.price{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+}
+.container1{
+    border: white solid 2px;
+    box-shadow: 2px 2px 2px 2px white;
+    margin: 40px;
+    height: fit-content;
+ }
+ .picture1{
+     width: 300px;
+     height: 200px;
+     cursor: pointer;
+ }
+ .all-product .container1{
+    margin-top: 150px;
+    margin-left: 100px;
+    width: 250px;
+}
+
+    .container1 a{
+        margin-top: 0px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        font-size: 15px;
+        text-decoration: none;
+        color: black;
+    }
+    .container1 a .description{
+        margin-left: 0px;
+    }
+
+  .all-product a .description{
+     max-width: 300px;
+     margin-top: 5px;
+     font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+ }
+  .all-product .picture1{
+     margin-left: -50px;
+     margin-top: 0px;
+  }
+  .all-product a .price1{
+     max-width: 300px;
+     margin-top: -10px;
+     font-size: 15px;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     text-decoration: none;
+
+    }
+    .price1::before{
+     content: ' ';
+     display: block;
+     width: 100px;
+     height: 2px;
+     background-color: black;
+
+    }
+  .all-product a .name{
+     max-width: 300px;  
+     margin-left: -40px;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     text-decoration: none;
+ }
+  .all-product .name:hover{
+     color:orangered;
+ }
+ .main{
+     display: flex;
+     flex-flow:wrap ;
+     margin-top: -70px;
+
+ }
+ .container2{
+     margin:0px 0px 0px 50px
+ }
+ .all-product .container1{
+    margin-top: 150px;
+    margin-left: 20px;
+    width: 250px;
+}
+</style>
+{%endblock%}

@@ -1,0 +1,44 @@
+{%extends 'home/layot.html'%}
+{%block body%}
+<form method="post" class="form">
+    {%csrf_token%}
+ <input type="text" name="Firstname" placeholder="Firstname" required><br>   
+ <input type="text" name="Lastname" placeholder="Lastname" required><br>   
+ <input type="text" name="Username" placeholder="Username" required><br>
+ <input type="email" name="Email" placeholder="Email" required><br>   
+ <input type="text" name="Phonenumber" maxlength="11" placeholder="Phone number" required><br>  
+ <input type="password" name="Password1" placeholder="Create password" required><br>
+ <input type="password" name="Password2" placeholder="Return password" required><br>
+
+ <select name="select">
+    <option disabled value="Chose country" selected>Chose country</option> 
+   {%for countries in country%}  
+<option value="{{countries.code}}">{{countries.Countrys}}</option>
+ {%endfor%}
+</select> <br/>   
+ <input type="submit"><br/>   
+</form>
+<h2 class="h2"><a href="{%url 'login'%}" class="link">Do you have already account</a></h2>
+{%for message  in messages%}
+<div class="error">
+<h1>{{message}}</h1>
+</div>
+{%endfor%}
+<style>
+    .message{
+    color: brown;
+}
+.error{
+    color: brown;
+    text-align: center;
+}
+.link{
+    color: brown;
+    text-decoration: none;
+}
+.h2 .link{
+    text-align: center;
+    margin-left: 530px;
+}
+</style>
+{%endblock%}

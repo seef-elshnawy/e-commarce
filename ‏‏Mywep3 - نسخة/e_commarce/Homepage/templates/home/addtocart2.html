@@ -1,0 +1,57 @@
+{%extends 'home/layot.html'%}
+{%load static%}
+{%block body%}
+<div class="title">
+    <h1>Add to cart</h1>
+</div>
+{%if user.is_authenticated%}
+<div class="Addtocart">
+    <table style="width: 900px; margin-left: 260px;">
+        <tr>
+ <th>Type</th>
+ <th>price</th>
+      </tr>
+      {%for adds in add%}
+
+      <tr>
+        <td><div class="picture" ><img src="{{adds.image.url}}" alt="shirt" width="100px" height="100px"></div>
+            {{adds.name}}</td>
+      <td>{{adds.price2}}</td>
+      <td>tax={{price}}</td>
+      <td style="border: none; font-size: 10px;">
+        <a href="{%url 'remove' adds.id%}" style="text-decoration:none;
+         color:black;
+         font-size: 20px;
+         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"
+        >
+            remove</a>
+        </td>
+  </tr> 
+  {%endfor%}
+
+</table>
+
+</div>
+<div>
+    <div style=" margin-top:15px;">
+        <a href="{%url 'men'%}" style="text-decoration: none; font-size: 20px; margin-left: 530px;">Add a Products</a> 
+     </div>
+ </div>
+ 
+{%else%}
+login firist
+{%endif%}
+<style>
+    table{
+        width: 500px; 
+        height: 150px;
+        border-collapse: collapse;
+        margin-left: 400px;
+        margin-top: 150px;
+        text-align: center;
+    }
+    td ,th{
+    border: orangered solid 2px; 
+    }
+</style>
+{%endblock%}

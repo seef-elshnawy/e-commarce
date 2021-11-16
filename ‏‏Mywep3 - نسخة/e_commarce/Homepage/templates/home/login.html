@@ -1,0 +1,15 @@
+{%extends 'home/layot.html'%} 
+{%block body%}
+
+<h1 class="log">Log-in</h1>
+<form method="post">
+    {%csrf_token%}
+Username<input type="text" name="username" placeholder="Enter Username or Email"><br>
+password<input type="password" name="password" placeholder="password"><br>
+<input type="submit" class="input">
+</form>
+<a href="{%url 'sign'%}" style="font-size: 25px; margin-left: 600px; text-decoration: none;">create a new account</a>
+{%for message in messages%}
+{{message}}
+{%endfor%}
+{%endblock%}
